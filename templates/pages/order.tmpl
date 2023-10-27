@@ -1,0 +1,43 @@
+{{ define "pages/order.tmpl" }}
+{{ template "globals/head.tmpl" .}}
+
+<body>
+	<div class="col-12">
+		<div class="container" style="max-width: 360px;">
+			{{ template "globals/header.tmpl" .}}
+			{{ if .err }}
+			<div class="alert alert-danger" role="alert">
+				{{ .err }}
+			</div>
+			{{ else }}
+			<div class="alert alert-success" role="alert">
+				Here is your order summary. We tried our best to optimize the pack quantity.
+			</div>
+			<div class="d-flex p-2 bd-highlight justify-content-center">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Pack Size</th>
+							<th scope="col" class="text-end">Quantity</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{ range $key, $value := .shipmentSummary }}
+						<tr>
+							<td>{{ $key }}</td>
+							<td class="text-end">{{ $value }}</td>
+						</tr>
+						{{end}}
+					</tbody>
+				</table>
+			</div>
+			{{ end }}
+			<p class="text-center">
+				<a href="/" class="link-primary">← Back</a>
+			</p>
+		</div>
+	</div>
+</body>
+
+{{ template "globals/footer.tmpl" .}}
+{{ end }}

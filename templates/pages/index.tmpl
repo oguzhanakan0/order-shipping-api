@@ -1,0 +1,34 @@
+{{ define "pages/index.tmpl" }}
+{{ template "globals/head.tmpl" .}}
+
+<body>
+	<div class="col-12">
+		<div class="container" style="max-width: 420px;">
+			{{ template "globals/header.tmpl" .}}
+			<div class="d-flex p-2 bd-highlight justify-content-center">
+				<form action="/order" method="get">
+					<div class="mb-3">
+						<label for="inputQuantity" class="form-label">Order Quantity</label>
+						<input name="quantity" type="number" min="1" max="1000000000" class="form-control"
+							id="inputQuantity" aria-describedby="quantityHelp" required>
+						<div id="quantityHelp" class="form-text">Enter a whole number</div>
+					</div>
+					<div class="mb-3">
+						<label for="inputSizes" class="form-label">Pack Sizes (Optional)</label>
+						<input name="sizes" class="form-control" id="inputSizes" aria-describedby="sizesHelp"
+							value="250, 500, 1000, 2000, 5000">
+						<div id="sizesHelp" class="form-text">Enter a series of pack sizes divided by a comma (,)
+						</div>
+					</div>
+					<div class="alert alert-light mb-3" role="alert">
+						If you choose to leave the Pack Sizes empty, default pack sizes on server side will be used when
+						generating your shipment.
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+{{ template "globals/footer.tmpl" .}}
+{{ end }}
