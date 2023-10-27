@@ -3,11 +3,11 @@ Sample REST API for handling shipments for given quantity and sizes.
 The API aims to optimize the number of items and packages shipped (e.g. minimum of excess items and minimum number of packages), prioritizing items over packages.
 
 ## Test Live
-The app is deployed in GCP Cloud Run and same endpoints can be accessed by setting `base_url` parameter to [https://good-blast-api-zfbs2ytkgq-lz.a.run.app](https://good-blast-api-zfbs2ytkgq-lz.a.run.app).
+Navigate to [https://shipment-generator-api-zfbs2ytkgq-uc.a.run.app/](https://shipment-generator-api-zfbs2ytkgq-uc.a.run.app/)
 
 ## Run Locally
 
-Run 
+On your Terminal, run 
 ```
 docker compose up
 ```
