@@ -10,6 +10,11 @@
 				{{ .err }}
 			</div>
 			{{ else }}
+			<div class="alert alert-light" role="alert">
+				Order quantity: {{ .quantity }}
+				<br>
+				Pack sizes: {{ .sizes }}
+			</div>
 			<div class="alert alert-success" role="alert">
 				Here is your order summary. We tried our best to optimize the pack quantity.
 			</div>

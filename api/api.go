@@ -98,32 +98,24 @@ func getSizesFromContext(c *gin.Context) ([]int, error) {
 
 // Wrapper function to get query params `sizes` and `quantity` from context and create an
 // order summary out of them.
-func generateShipmentFromContext(c *gin.Context) (map[int]int, error) {
+func generateShipmentFromContext(c *gin.Context) (map[int]int, int, []int, error) {
 	var res map[int]int
 	v, err := strconv.Atoi(c.Query("quantity"))
 
-	if err != nil {
-		return res, errors.New("Cannot parse quantity. Please check your input.")
-	}
-
-	if v < 0 {
-		return res, errors.New("Quantity cannot be negative.")
-	}
-
-	if v > 2147483647 {
-		return res, errors.New("Quantity too big, must be int32.")
+	if err != nil || v < 0 || v > 2147483647 {
+		return res, v, []int{}, errors.New("Cannot parse quantity. Please check your input.")
 	}
 
 	sizes, err := getSizesFromContext(c)
 
 	if err != nil {
-		return res, errors.New("Cannot parse sizes. Please check your input.")
+		return res, v, []int{}, errors.New("Cannot parse sizes. Please check your input.")
 	}
 
 	slices.Sort(sizes)
 
 	res, _ = generateShipment(v, sizes)
-	return res, nil
+	return res, v, sizes, nil
 }
 
 // Views
@@ -135,17 +127,19 @@ func IndexHTML(c *gin.Context) {
 
 // Returns a HTML page including the requested order's summary
 func GetShipmentHTML(c *gin.Context) {
-	res, err := generateShipmentFromContext(c)
+	res, v, sizes, err := generateShipmentFromContext(c)
 
 	c.HTML(http.StatusOK, "pages/order.tmpl", gin.H{
 		"shipmentSummary": res,
 		"err":             err,
+		"quantity":        v,
+		"sizes":           sizes,
 	})
 }
 
 // Returns a JSON including the requested order's summary
 func GetShipment(c *gin.Context) {
-	res, err := generateShipmentFromContext(c)
+	res, _, _, err := generateShipmentFromContext(c)
 
 	if err != nil {
 		c.Status(http.StatusBadRequest)
