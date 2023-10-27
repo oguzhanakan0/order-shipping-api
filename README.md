@@ -46,5 +46,5 @@ Sample response:
 ## Note on Pack Sizes
 The pack sizes are decided in the following hierarchical order:
 1. If the pack sizes are specified as a comma-separated list in the request
-2. If the pack sizes are specified in `DEFAULT_PACK_SIZES` environment variable 
+2. If the pack sizes are specified in `DEFAULT_PACK_SIZES` environment variable (you can change it in `docker-compose.yaml` to play around)
 3. If both are not present, a default array of sizes `250,500,1000,2000,5000` are used.
