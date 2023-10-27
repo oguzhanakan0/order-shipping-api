@@ -22,11 +22,11 @@ docker exec -it shipment-generator go test
 
 While the Docker container is running, you can visit [http://localhost:8080](http://localhost:8080) to test the app. You will be presented with an interface like below:
 
-<img src="/docs/img/ui-1.png" width="100">
+<img src="/docs/img/ui-1.png" width="480">
 
 You can test the app by changing the input. Once you click on **Submit**, you will be redirected to the order page where a summary of your shipment is present:
 
-<img src="/docs/img/ui-2.png" width="100">
+<img src="/docs/img/ui-2.png" width="480">
 
 ## Test with cURL
 
@@ -37,7 +37,7 @@ curl -X GET "http://localhost:8080/api/order?quantity=1235&sizes=250,500,1000,20
 
 Sample response:
 
-<img src="/docs/img/terminal-1.png" width="100">
+<img src="/docs/img/terminal-1.png" width="480">
 
 ## Deployment
 The app is deployed in GCP Cloud Run and same endpoints can be accessed by setting `base_url` parameter to [https://good-blast-api-zfbs2ytkgq-lz.a.run.app](https://good-blast-api-zfbs2ytkgq-lz.a.run.app).
